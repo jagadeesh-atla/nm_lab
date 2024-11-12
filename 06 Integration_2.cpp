@@ -80,10 +80,15 @@ double simp3_8() {
         for (int j = 0; j <= m; j++) {
             switch(coeff(i, j)) {
                 case CORNER: ans += 1 * table[i][j]; break;
-                case EDGE  : ans += 3 * table[i][j]; break;
+                case EDGE  : {
+                    if (i % 3 == 0 or j % 3 == 0) ans += 3 * table[i][j];
+                    else ans += 2 * table[i][j];
+                    break;
+                }
                 case REST  : {
-                    if (i % 3 == 0 and j % 3 == 0) ans += 9 * table[i][j];
-                    else ans += 27 * table[i][j];
+                    if (i % 3 == 0 and j % 3 == 0) ans += 27 * table[i][j];
+                    else if (i % 3 == 0 or j % 3 == 0) ans += 6 * table[i][j];
+                    else ans += 4 * table[i][j];
                     break;
                 }
                 default    : break;
